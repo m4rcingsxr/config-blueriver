@@ -6,7 +6,7 @@ build:
   version: "0.0.0"
 
 accounts:
-  message: "Dev Accounts API 2"
+  message: "Dev Accounts API"
   contactDetails:
     name: "Dev Name"
     email: "Dev@email.com"
