@@ -15,3 +15,23 @@ cards:
   onCallSupport:
     - (453) 392-4829
     - (236) 203-0384
+
+eureka:
+  instance:
+    preferIpAddress: true
+    # When registering with Eureka, prefer the machine's IP address over its hostname.
+    # Useful in Docker or Kubernetes, where hostnames may not resolve correctly across containers.
+
+  client:
+    registerWithEureka: true
+    # This microservice should register itself with Eureka so that other services can discover it.
+
+    fetchRegistry: true
+    # This microservice should fetch the registry (list of all services) from Eureka,
+    # so it can discover and communicate with other registered services.
+
+    serviceUrl:
+      defaultZone: "http://eureka-server:8070/eureka/"
+      # The Eureka server’s URL where this client will register and fetch the registry.
+      # In a real setup inside Docker or Kubernetes, replace 'localhost' with the Eureka server's hostname or service name.
+

@@ -1,12 +1,15 @@
 spring:
   rabbitmq:
-    host: "rabbit"
+    host: "rabbit" # The hostname of the RabbitMQ broker (inside Docker network, container name 'rabbit' is resolvable)
 
 eureka:
   instance:
-    hostname: localhost # Single inside of docker network, standalone euerka server
+    hostname: localhost # The hostname where this Eureka instance is running (here it's localhost since it's a standalone server)
   client:
-    fetch-registry: false
-    register-with-eureka: false
+    fetch-registry: false # Do not fetch the registry from other Eureka servers (since this is the standalone server itself)
+    register-with-eureka: false # Do not register this Eureka server with another Eureka server (again because it's standalone)
     service-url:
       default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      # The URL clients will use to connect to this Eureka server.
+      # Resolves to http://localhost:<server.port>/eureka/
+      # <server.port> is taken from the Spring Boot server.port property
