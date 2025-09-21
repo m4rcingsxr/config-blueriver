@@ -15,13 +15,3 @@ accounts:
   onCallSupport:
     - (453) 392-4829
     - (236) 203-0384
-
-management:
-  endpoint:
-    health:
-      probes:
-        enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: refresh,busrefresh,health,info
