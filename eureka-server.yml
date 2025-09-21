@@ -4,7 +4,7 @@ spring:
 
 eureka:
   instance:
-    hostname: eureka-server
+    hostname: localhost # Single inside of docker network, standalone euerka server
   client:
     fetch-registry: false
     register-with-eureka: false
