@@ -20,4 +20,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: liveness,readiness
+        include: health
