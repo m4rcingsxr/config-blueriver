@@ -34,3 +34,25 @@ eureka:
       defaultZone: "http://eureka-server:8070/eureka/"
       # The Eureka server’s URL where this client will register and fetch the registry.
       # In a real setup inside Docker or Kubernetes, replace 'localhost' with the Eureka server's hostname or service name.
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowSize: 10
+      # Number of calls recorded in the sliding window (successes + failures).
+      # Failures are counted against this window to calculate the failure rate.
+      # Example: with 10, the breaker will decide based on the last 10 calls.
+
+      permittedNumberOfCallsInHalfOpenState: 2
+      # When the breaker transitions from OPEN → HALF_OPEN,
+      # this defines how many trial calls are allowed to test recovery.
+      # If these succeed, the breaker closes again. If they fail, it reopens.
+
+      failureRateThreshold: 50
+      # Percentage of failed calls in the sliding window that will trip the breaker.
+      # Example: if 50% or more of the last N calls failed, the breaker opens.
+
+      waitDurationInOpenState: 10000
+      # How long (in milliseconds) the breaker stays OPEN before moving to HALF_OPEN.
+      # During this time, all calls are immediately short-circuited (fallback triggered).
+      # After this duration, trial calls are permitted again.
