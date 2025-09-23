@@ -42,3 +42,6 @@ resilience4j.circuitbreaker:
       # How long (in milliseconds) the breaker stays OPEN before moving to HALF_OPEN.
       # During this time, all calls are immediately short-circuited (fallback triggered).
       # After this duration, trial calls are permitted again.
+
+      recordExceptions:
+        - java.lang.IllegalArgumentException
