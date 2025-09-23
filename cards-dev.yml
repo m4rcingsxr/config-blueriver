@@ -34,3 +34,25 @@ eureka:
       defaultZone: "http://eureka-server:8070/eureka/"
       # The Eureka server’s URL where this client will register and fetch the registry.
       # In a real setup inside Docker or Kubernetes, replace 'localhost' with the Eureka server's hostname or service name.
+
+#At most 1 request every 5 seconds will pass.
+#If a second request comes within the same 5s window:
+#It waits up to 5s (timeoutDuration: 5000).
+#If a new permit appears during that wait → request goes through.
+#If not → request is rejected and fallback is called.
+resilience4j.ratelimiter:
+  configs:
+    default:
+      timeoutDuration: 5000
+      # How long (in milliseconds) a thread should wait for a permit
+      # if the limit has already been reached.
+      # Example: 5000 = wait up to 5 seconds before giving up.
+      # If set to 0, requests are immediately rejected when no permit is available.
+
+      limitRefreshPeriod: 5000
+      # The interval (in milliseconds) after which the available permits are reset.
+      # Example: every 5 seconds, the counter resets and a fresh set of permits becomes available.
+
+      limitForPeriod: 1
+      # Maximum number of calls (permits) allowed within each refresh period.
+      # Example: 1 = only one call every 5 seconds is allowed.
